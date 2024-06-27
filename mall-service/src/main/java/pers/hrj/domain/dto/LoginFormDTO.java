@@ -2,9 +2,9 @@ package pers.hrj.domain.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
 
 @Data
 @ApiModel(description = "登录表单实体")

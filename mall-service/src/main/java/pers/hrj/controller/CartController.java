@@ -1,6 +1,7 @@
 package pers.hrj.controller;
 
 
+import jakarta.validation.Valid;
 import pers.hrj.domain.dto.CartFormDTO;
 import pers.hrj.domain.po.Cart;
 import pers.hrj.domain.vo.CartVO;
@@ -12,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+
 import java.util.List;
 
 @Api(tags = "购物车相关接口")

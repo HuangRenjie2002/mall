@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.List;
 
 @Data
-@ConfigurationProperties(prefix = "hm.auth")
+@ConfigurationProperties(prefix = "mll.auth")
 public class AuthProperties {
     private List<String> includePaths;
     private List<String> excludePaths;
