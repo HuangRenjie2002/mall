@@ -1,8 +1,8 @@
 package pers.hrj.common.advice;
 
 
-
 import jakarta.servlet.ServletException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -11,7 +11,6 @@ import pers.hrj.common.exception.BadRequestException;
 import pers.hrj.common.exception.CommonException;
 import pers.hrj.common.exception.DbException;
 import pers.hrj.common.utils.WebUtils;
-import lombok.extern.slf4j.Slf4j;
 
 
 import java.net.BindException;
