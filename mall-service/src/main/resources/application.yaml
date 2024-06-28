@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: hm-service
+    name: mall-service
   profiles:
     active: dev
   datasource:
@@ -19,7 +19,7 @@ mybatis-plus:
       id-type: auto
 logging:
   level:
-    com.mall: debug
+    pers.hrj: debug
   pattern:
     dateformat: HH:mm:ss:SSS
   file:
@@ -40,8 +40,8 @@ knife4j:
 mall:
   jwt:
     location: classpath:mall.jks
-    alias: hmall
-    password: hmall123
+    alias: mall
+    password: 123456
     tokenTTL: 30m
   auth:
     excludePaths:
@@ -49,4 +49,4 @@ mall:
       - /users/login
       - /items/**
       - /hi
-# keytool -genkeypair -alias hmall -keyalg RSA -keypass hmall123 -keystore mall.jks -storepass hmall123
+# keytool -genkeypair -alias mall -keyalg RSA -keypass 123465 -keystore mall.jks -storepass 123456

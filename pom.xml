@@ -11,6 +11,12 @@
     <modules>
         <module>mall-common</module>
         <module>mall-service</module>
+        <module>item-service</module>
+        <module>cart-service</module>
+        <module>mall-api</module>
+        <module>user-service</module>
+        <module>trade-service</module>
+        <module>pay-service</module>
     </modules>
 
     <parent>
