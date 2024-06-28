@@ -41,8 +41,9 @@ public class MvcConfig implements WebMvcConfigurer {
             registration.excludePathPatterns(excludePaths);
         }
         registration.excludePathPatterns(
+                "/**",
                 "/error",
-                "/favicon.ico",
+                "/META-INF/favicon.ico",
                 "/v2/**",
                 "/v3/**",
                 "/swagger-resources/**",

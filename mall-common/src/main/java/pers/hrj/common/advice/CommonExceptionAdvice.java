@@ -50,7 +50,9 @@ public class CommonExceptionAdvice {
 
     @ExceptionHandler(ServletException.class)
     public Object handleNestedServletException(ServletException e) {
-        log.error("参数异常 -> NestedServletException，{}", e.getMessage());
+        if (e.getMessage().equals("No static resource favicon.ico."))
+            return null;
+        log.error("参数异常 -> ServletException，{}", e.getMessage());
         log.debug("", e);
         return processResponse(new BadRequestException("请求参数处理异常"));
     }
