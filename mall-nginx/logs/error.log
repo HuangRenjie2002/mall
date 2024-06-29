@@ -1,0 +1,2 @@
+2024/06/29 17:19:03 [notice] 26196#27780: signal process started
+2024/06/29 17:19:03 [error] 26196#27780: CreateFile() "D:\mall\mall-nginx/logs/nginx.pid" failed (2: The system cannot find the file specified)

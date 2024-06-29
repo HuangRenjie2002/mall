@@ -1,4 +1,0 @@
-mall:
-  db:
-    host: mysql
-    pw: 123
