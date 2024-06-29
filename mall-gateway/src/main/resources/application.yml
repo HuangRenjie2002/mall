@@ -43,4 +43,3 @@ mall:
       - /search/**
       - /users/login
       - /items/**
-      - /hi

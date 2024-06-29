@@ -38,8 +38,9 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
             response.setStatusCode(HttpStatus.UNAUTHORIZED);
             return response.setComplete();
         }
-        System.out.println("userId: " + userId);
-        return chain.filter(exchange);
+        ServerWebExchange serverWebExchange = exchange.mutate()
+                .request(builder -> builder.header("user-info", userId.toString())).build();
+        return chain.filter(serverWebExchange);
     }
 
     private boolean isExclude(String path) {
