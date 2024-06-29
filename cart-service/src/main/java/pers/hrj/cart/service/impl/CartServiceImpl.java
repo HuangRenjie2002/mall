@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pers.hrj.api.client.ItemClient;
 import pers.hrj.api.dto.ItemDTO;
+import pers.hrj.cart.config.CartProperties;
 import pers.hrj.cart.domain.dto.CartFormDTO;
 import pers.hrj.cart.domain.po.Cart;
 import pers.hrj.cart.domain.vo.CartVO;
@@ -37,6 +38,7 @@ import java.util.stream.Collectors;
 public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements ICartService {
 
     private final ItemClient itemClient;
+    private final CartProperties cartProperties;
 
     @Override
     public void addItem2Cart(CartFormDTO cartFormDTO) {
@@ -114,8 +116,8 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
 
     private void checkCartsFull(Long userId) {
         long count = lambdaQuery().eq(Cart::getUserId, userId).count();
-        if (count >= 10) {
-            throw new BizIllegalException(StrUtil.format("用户购物车课程不能超过{}", 10));
+        if (count >= cartProperties.getMaxItems()) {
+            throw new BizIllegalException(StrUtil.format("用户购物车课程不能超过{}", cartProperties.getMaxItems()));
         }
     }
 

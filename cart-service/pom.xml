@@ -23,6 +23,11 @@
             <artifactId>mall-common</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>pers.hrj</groupId>
+            <artifactId>mall-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <!--web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -53,10 +58,15 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+        <!--nacos配置管理-->
         <dependency>
-            <groupId>pers.hrj</groupId>
-            <artifactId>mall-api</artifactId>
-            <version>1.0.0</version>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!--读取bootstrap文件-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
     </dependencies>
     <build>
