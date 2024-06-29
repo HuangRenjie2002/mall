@@ -40,8 +40,8 @@ knife4j:
 mall:
   jwt:
     location: classpath:mall.jks
-    alias: mall
-    password: 123456
+    alias: hmall
+    password: hmall123
     tokenTTL: 30m
   auth:
     excludePaths:
