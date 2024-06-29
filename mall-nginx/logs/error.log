@@ -1,5 +1,0 @@
-2024/06/28 09:52:57 [emerg] 17440#5560: bind() to 0.0.0.0:80 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
-2024/06/28 09:56:07 [emerg] 20764#8824: "server" directive is not allowed here in D:\mall\hmall-nginx/conf/nginx.conf:29
-2024/06/28 09:59:38 [notice] 8336#10836: signal process started
-2024/06/28 10:04:04 [error] 10988#7216: *3 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /api/search/list?key=&pageNo=1&pageSize=20&sortBy=&isAsc=false HTTP/1.1", upstream: "http://[::1]:8080/search/list?key=&pageNo=1&pageSize=20&sortBy=&isAsc=false", host: "localhost:18080", referrer: "http://localhost:18080/search.html"
-2024/06/28 10:04:40 [error] 10988#7216: *17 CreateFile() "D:\mall\mall-nginx/html/mall-portal/js/axios.min.map" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /js/axios.min.map HTTP/1.1", host: "localhost:18080"

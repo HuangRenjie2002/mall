@@ -30,3 +30,17 @@ spring:
           uri: lb://pay-service
           predicates:
             - Path=/pay-orders/**
+#      default-filters:
+#        - Custom=1,2,3
+mall:
+  jwt:
+    location: classpath:mall.jks
+    alias: mall
+    password: 123456
+    tokenTTL: 30m
+  auth:
+    excludePaths:
+      - /search/**
+      - /users/login
+      - /items/**
+      - /hi

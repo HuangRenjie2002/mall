@@ -55,5 +55,5 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 /logs/
-/hmall-nginx/temp/
-/hmall-nginx/logs/
+/mall-nginx/logs/
+/mall-nginx/temp/

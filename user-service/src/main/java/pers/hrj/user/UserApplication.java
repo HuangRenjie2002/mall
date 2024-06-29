@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import pers.hrj.api.config.DefaultFeignConfig;
 
 @MapperScan("pers.hrj.user.mapper")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"pers.hrj"})
 @EnableFeignClients(basePackages = "pers.hrj.api.client",defaultConfiguration = DefaultFeignConfig.class)
 public class UserApplication {
     public static void main(String[] args) {
