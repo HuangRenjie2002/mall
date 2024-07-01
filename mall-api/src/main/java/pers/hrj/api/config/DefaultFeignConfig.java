@@ -4,6 +4,7 @@ import feign.Logger;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.context.annotation.Bean;
+import pers.hrj.api.client.fallback.ItemClientFallbackFactory;
 import pers.hrj.common.utils.UserContext;
 
 public class DefaultFeignConfig {
@@ -20,5 +21,10 @@ public class DefaultFeignConfig {
                 requestTemplate.header("user-info", userid.toString());
             }
         };
+    }
+
+    @Bean
+    public  ItemClientFallbackFactory itemClientFallbackFactory(){
+        return new ItemClientFallbackFactory();
     }
 }
