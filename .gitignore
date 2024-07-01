@@ -56,5 +56,3 @@ buildNumber.properties
 .classpath
 /logs/
 /mall-nginx/logs/access.log
-/mall-nginx/logs/error.log
-/mall-nginx/logs/nginx.pid
