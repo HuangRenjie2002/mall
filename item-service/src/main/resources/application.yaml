@@ -1,31 +1,5 @@
 server:
   port: 8081
-spring:
-  application:
-    name: item-service
-  profiles:
-    active: dev
-  datasource:
-    url: jdbc:mysql://${mall.db.host}:3306/mall-item?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: ${mall.db.pw}
-  cloud:
-    nacos:
-      server-addr: 192.168.60.10:8848
-mybatis-plus:
-  configuration:
-    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
-  global-config:
-    db-config:
-      update-strategy: not_null
-      id-type: auto
-logging:
-  level:
-    pers.hrj: debug
-  pattern:
-    dateformat: HH:mm:ss:SSS
-  file:
-    path: "logs/${spring.application.name}"
-knife4j:
-  enable: true
+mall:
+  db:
+    database: mall-item

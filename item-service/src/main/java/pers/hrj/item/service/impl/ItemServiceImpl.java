@@ -2,6 +2,7 @@ package pers.hrj.item.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pers.hrj.api.dto.ItemDTO;
 import pers.hrj.api.dto.OrderDetailDTO;
 import pers.hrj.common.exception.BizIllegalException;
@@ -24,6 +25,7 @@ import java.util.List;
 public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements IItemService {
 
     @Override
+    @Transactional
     public void deductStock(List<OrderDetailDTO> items) {
         String sqlStatement = "pers.hrj.item.mapper.ItemMapper.updateStock";
         boolean r = false;
