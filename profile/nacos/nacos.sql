@@ -11,7 +11,7 @@
  Target Server Version : 80400 (8.4.0)
  File Encoding         : 65001
 
- Date: 01/07/2024 13:47:37
+ Date: 01/07/2024 17:00:44
 */
 
 SET NAMES utf8mb4;
@@ -41,7 +41,7 @@ CREATE TABLE `config_info`  (
   `encrypted_data_key` text CHARACTER SET utf8mb3 COLLATE utf8mb3_bin NOT NULL COMMENT '密钥',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfo_datagrouptenant`(`data_id` ASC, `group_id` ASC, `tenant_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = 'config_info' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = 'config_info' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of config_info
@@ -50,6 +50,7 @@ INSERT INTO `config_info` VALUES (1, 'jdbc.yaml', 'DEFAULT_GROUP', 'spring:\r\n 
 INSERT INTO `config_info` VALUES (2, 'log.yaml', 'DEFAULT_GROUP', 'logging:\r\n  level:\r\n    pers.hrj: debug\r\n  pattern:\r\n    dateformat: HH:mm:ss:SSS\r\n  file:\r\n    path: \"logs/${spring.application.name}\"', '51945283ec08a0d51c4b15cc134617b1', '2024-06-29 17:30:06', '2024-06-29 17:30:06', NULL, '192.168.60.1', '', '', '日志配置', NULL, NULL, 'yaml', NULL, '');
 INSERT INTO `config_info` VALUES (3, 'cart-service.yaml', 'DEFAULT_GROUP', 'mall:\n cart:\n  maxItems: 2', '59eddba630bae276b1e0dab2430ffd11', '2024-06-29 17:45:54', '2024-06-29 17:47:20', 'nacos', '192.168.60.1', '', '', '', '', '', 'yaml', '', '');
 INSERT INTO `config_info` VALUES (4, 'gateway-routes.json', 'DEFAULT_GROUP', '[\r\n    {\r\n        \"id\": \"item\",\r\n        \"predicates\": [{\r\n            \"name\": \"Path\",\r\n            \"args\": {\"_genkey_0\":\"/items/**\", \"_genkey_1\":\"/search/**\"}\r\n        }],\r\n        \"filters\": [],\r\n        \"uri\": \"lb://item-service\"\r\n    },\r\n    {\r\n        \"id\": \"cart\",\r\n        \"predicates\": [{\r\n            \"name\": \"Path\",\r\n            \"args\": {\"_genkey_0\":\"/carts/**\"}\r\n        }],\r\n        \"filters\": [],\r\n        \"uri\": \"lb://cart-service\"\r\n    },\r\n    {\r\n        \"id\": \"user\",\r\n        \"predicates\": [{\r\n            \"name\": \"Path\",\r\n            \"args\": {\"_genkey_0\":\"/users/**\", \"_genkey_1\":\"/addresses/**\"}\r\n        }],\r\n        \"filters\": [],\r\n        \"uri\": \"lb://user-service\"\r\n    },\r\n    {\r\n        \"id\": \"trade\",\r\n        \"predicates\": [{\r\n            \"name\": \"Path\",\r\n            \"args\": {\"_genkey_0\":\"/orders/**\"}\r\n        }],\r\n        \"filters\": [],\r\n        \"uri\": \"lb://trade-service\"\r\n    },\r\n    {\r\n        \"id\": \"pay\",\r\n        \"predicates\": [{\r\n            \"name\": \"Path\",\r\n            \"args\": {\"_genkey_0\":\"/pay-orders/**\"}\r\n        }],\r\n        \"filters\": [],\r\n        \"uri\": \"lb://pay-service\"\r\n    }\r\n]', 'ab18523ae6341c6a7d2fc5ce03e0f475', '2024-07-01 10:37:27', '2024-07-01 10:37:27', NULL, '192.168.60.1', '', '', '网关路由信息', NULL, NULL, 'json', NULL, '');
+INSERT INTO `config_info` VALUES (5, 'seata.yaml', 'DEFAULT_GROUP', 'seata:\n  registry: # TC服务注册中心的配置，微服务根据这些信息去注册中心获取tc服务地址\n    type: nacos # 注册中心类型 nacos\n    nacos:\n      server-addr: 192.168.60.10:8848 # nacos地址\n      namespace: \"\" # namespace，默认为空\n      group: DEFAULT_GROUP # 分组，默认是DEFAULT_GROUP\n      application: seata-server # seata服务名称\n      username: nacos\n      password: nacos\n  tx-service-group: mall # 事务组名称\n  service:\n    vgroup-mapping: # 事务组与tc集群的映射关系\n      mall: \"default\"\n  data-source-proxy-mode: AT', 'e3a33d1c76b2f5e2fa7be558522fa465', '2024-07-01 16:02:11', '2024-07-01 16:54:17', NULL, '192.168.60.1', '', '', 'seata客户端配置', '', '', 'yaml', '', '');
 
 -- ----------------------------
 -- Table structure for config_info_aggr
@@ -190,7 +191,7 @@ CREATE TABLE `his_config_info`  (
   INDEX `idx_gmt_create`(`gmt_create` ASC) USING BTREE,
   INDEX `idx_gmt_modified`(`gmt_modified` ASC) USING BTREE,
   INDEX `idx_did`(`data_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '多租户改造' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_bin COMMENT = '多租户改造' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of his_config_info
@@ -201,6 +202,9 @@ INSERT INTO `his_config_info` VALUES (0, 3, 'cart-service.yaml', 'DEFAULT_GROUP'
 INSERT INTO `his_config_info` VALUES (3, 4, 'cart-service.yaml', 'DEFAULT_GROUP', '', 'hm:\r\n cart:\r\n  maxItems: 1', '7760b4f00b1b690b833d8574394e3c49', '2024-06-29 17:46:54', '2024-06-29 17:46:54', 'nacos', '192.168.60.1', 'U', '', '');
 INSERT INTO `his_config_info` VALUES (3, 5, 'cart-service.yaml', 'DEFAULT_GROUP', '', 'mall:\n cart:\n  maxItems: 1', 'c3345f745b8141c6b7b247b4eecb254e', '2024-06-29 17:47:20', '2024-06-29 17:47:20', 'nacos', '192.168.60.1', 'U', '', '');
 INSERT INTO `his_config_info` VALUES (0, 6, 'gateway-routes.json', 'DEFAULT_GROUP', '', '[\r\n    {\r\n        \"id\": \"item\",\r\n        \"predicates\": [{\r\n            \"name\": \"Path\",\r\n            \"args\": {\"_genkey_0\":\"/items/**\", \"_genkey_1\":\"/search/**\"}\r\n        }],\r\n        \"filters\": [],\r\n        \"uri\": \"lb://item-service\"\r\n    },\r\n    {\r\n        \"id\": \"cart\",\r\n        \"predicates\": [{\r\n            \"name\": \"Path\",\r\n            \"args\": {\"_genkey_0\":\"/carts/**\"}\r\n        }],\r\n        \"filters\": [],\r\n        \"uri\": \"lb://cart-service\"\r\n    },\r\n    {\r\n        \"id\": \"user\",\r\n        \"predicates\": [{\r\n            \"name\": \"Path\",\r\n            \"args\": {\"_genkey_0\":\"/users/**\", \"_genkey_1\":\"/addresses/**\"}\r\n        }],\r\n        \"filters\": [],\r\n        \"uri\": \"lb://user-service\"\r\n    },\r\n    {\r\n        \"id\": \"trade\",\r\n        \"predicates\": [{\r\n            \"name\": \"Path\",\r\n            \"args\": {\"_genkey_0\":\"/orders/**\"}\r\n        }],\r\n        \"filters\": [],\r\n        \"uri\": \"lb://trade-service\"\r\n    },\r\n    {\r\n        \"id\": \"pay\",\r\n        \"predicates\": [{\r\n            \"name\": \"Path\",\r\n            \"args\": {\"_genkey_0\":\"/pay-orders/**\"}\r\n        }],\r\n        \"filters\": [],\r\n        \"uri\": \"lb://pay-service\"\r\n    }\r\n]', 'ab18523ae6341c6a7d2fc5ce03e0f475', '2024-07-01 10:37:27', '2024-07-01 10:37:27', NULL, '192.168.60.1', 'I', '', '');
+INSERT INTO `his_config_info` VALUES (0, 7, 'seata.yaml', 'DEFAULT_GROUP', '', 'seata:\r\n  registry: # TC服务注册中心的配置，微服务根据这些信息去注册中心获取tc服务地址\r\n    type: nacos # 注册中心类型 nacos\r\n    nacos:\r\n      server-addr: 192.168.60.10:8848 # nacos地址\r\n      namespace: \"\" # namespace，默认为空\r\n      group: DEFAULT_GROUP # 分组，默认是DEFAULT_GROUP\r\n      application: seata-server # seata服务名称\r\n      username: nacos\r\n      password: nacos\r\n  tx-service-group: mall # 事务组名称\r\n  service:\r\n    vgroup-mapping: # 事务组与tc集群的映射关系\r\n      mall: \"default\"', 'e5d2a27e0d53d79f969323340034e733', '2024-07-01 16:02:11', '2024-07-01 16:02:11', NULL, '192.168.60.1', 'I', '', '');
+INSERT INTO `his_config_info` VALUES (5, 8, 'seata.yaml', 'DEFAULT_GROUP', '', 'seata:\r\n  registry: # TC服务注册中心的配置，微服务根据这些信息去注册中心获取tc服务地址\r\n    type: nacos # 注册中心类型 nacos\r\n    nacos:\r\n      server-addr: 192.168.60.10:8848 # nacos地址\r\n      namespace: \"\" # namespace，默认为空\r\n      group: DEFAULT_GROUP # 分组，默认是DEFAULT_GROUP\r\n      application: seata-server # seata服务名称\r\n      username: nacos\r\n      password: nacos\r\n  tx-service-group: mall # 事务组名称\r\n  service:\r\n    vgroup-mapping: # 事务组与tc集群的映射关系\r\n      mall: \"default\"', 'e5d2a27e0d53d79f969323340034e733', '2024-07-01 16:36:16', '2024-07-01 16:36:17', NULL, '192.168.60.1', 'U', '', '');
+INSERT INTO `his_config_info` VALUES (5, 9, 'seata.yaml', 'DEFAULT_GROUP', '', 'seata:\n  registry: # TC服务注册中心的配置，微服务根据这些信息去注册中心获取tc服务地址\n    type: nacos # 注册中心类型 nacos\n    nacos:\n      server-addr: 192.168.60.10:8848 # nacos地址\n      namespace: \"\" # namespace，默认为空\n      group: DEFAULT_GROUP # 分组，默认是DEFAULT_GROUP\n      application: seata-server # seata服务名称\n      username: nacos\n      password: nacos\n  tx-service-group: mall # 事务组名称\n  service:\n    vgroup-mapping: # 事务组与tc集群的映射关系\n      mall: \"default\"\n  data-source-proxy-mode: XA', '98fa4b6d7b10652f5489027fb24edd1a', '2024-07-01 16:54:16', '2024-07-01 16:54:17', NULL, '192.168.60.1', 'U', '', '');
 
 -- ----------------------------
 -- Table structure for permissions
