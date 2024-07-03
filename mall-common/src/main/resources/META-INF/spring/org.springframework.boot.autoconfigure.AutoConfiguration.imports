@@ -1,3 +1,4 @@
 pers.hrj.common.config.MvcConfig
 pers.hrj.common.config.MyBatisConfig
 pers.hrj.common.config.JsonConfig
+pers.hrj.common.config.MqConfig

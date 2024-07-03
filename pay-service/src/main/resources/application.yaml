@@ -17,6 +17,12 @@ spring:
       httpclient:
         hc5:
           enabled: true
+  rabbitmq:
+    host: 192.168.60.10
+    port: 5672
+    virtual-host: /mall
+    username: mall
+    password: 666
 mybatis-plus:
   configuration:
     default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
