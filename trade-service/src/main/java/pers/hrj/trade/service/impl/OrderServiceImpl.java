@@ -3,6 +3,10 @@ package pers.hrj.trade.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessagePostProcessor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pers.hrj.api.client.CartClient;
@@ -11,6 +15,7 @@ import pers.hrj.api.dto.ItemDTO;
 import pers.hrj.api.dto.OrderDetailDTO;
 import pers.hrj.common.exception.BadRequestException;
 import pers.hrj.common.utils.UserContext;
+import pers.hrj.trade.constants.MqConstants;
 import pers.hrj.trade.domain.dto.OrderFormDTO;
 import pers.hrj.trade.domain.po.Order;
 import pers.hrj.trade.domain.po.OrderDetail;
@@ -41,6 +46,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     private final IOrderDetailService detailService;
     private final ItemClient itemClient;
     private final CartClient cartClient;
+    private final RabbitTemplate rabbitTemplate;
 
     @Override
     @GlobalTransactional
@@ -85,6 +91,16 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             e.printStackTrace();
             throw new RuntimeException("库存不足！");
         }
+
+        rabbitTemplate.convertAndSend(
+                MqConstants.DELAY_EXCHANGE_NAME,
+                MqConstants.DELAY_ORDER_KEY,
+                order.getId(),
+                message -> {
+                    message.getMessageProperties().setDelayLong(10000L);
+                    return message;
+                }
+        );
         return order.getId();
     }
 
@@ -95,6 +111,14 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         order.setStatus(2);
         order.setPayTime(LocalDateTime.now());
         updateById(order);
+    }
+
+    @Override
+    public void cancelOrder(Long orderId) {
+        lambdaUpdate().eq(Order::getId,orderId).set(Order::getStatus,5).update();
+        List<OrderDetail> list = detailService.lambdaQuery().eq(OrderDetail::getOrderId, orderId).list();
+        List<OrderDetailDTO> collect = list.stream().map(o -> new OrderDetailDTO(o.getItemId(), o.getNum())).collect(Collectors.toList());
+        itemClient.recoverStock(collect);
     }
 
     private List<OrderDetail> buildDetails(Long orderId, List<ItemDTO> items, Map<Long, Integer> numMap) {

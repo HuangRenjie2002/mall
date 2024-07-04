@@ -5,9 +5,12 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import pers.hrj.api.dto.PayOrderDTO;
 import pers.hrj.common.exception.BizIllegalException;
+import pers.hrj.common.utils.BeanUtils;
 import pers.hrj.pay.domain.dto.PayApplyDTO;
 import pers.hrj.pay.domain.dto.PayOrderFormDTO;
+import pers.hrj.pay.domain.po.PayOrder;
 import pers.hrj.pay.enums.PayType;
 import pers.hrj.pay.service.IPayOrderService;
 
@@ -37,4 +40,10 @@ public class PayController {
         payOrderService.tryPayOrderByBalance(payOrderFormDTO);
     }
 
+    @ApiOperation("根据id查询支付单")
+    @GetMapping("/biz/{id}")
+    public PayOrderDTO queryPayOrderByBizOrderNo(@PathVariable("id") Long id){
+        PayOrder payOrder = payOrderService.lambdaQuery().eq(PayOrder::getBizOrderNo, id).one();
+        return BeanUtils.copyBean(payOrder, PayOrderDTO.class);
+    }
 }

@@ -1,1 +1,2 @@
 2024/07/01 09:24:23 [notice] 23824#28060: signal process started
+2024/07/03 16:45:24 [error] 23960#23152: *24 CreateFile() "D:\mall\mall-nginx/html/mall-portal/myOrder.html" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /myOrder.html HTTP/1.1", host: "localhost:18080", referrer: "http://localhost:18080/paysuccess.html?orderId=1808421242356748289"

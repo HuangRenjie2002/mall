@@ -1,6 +1,7 @@
 package pers.hrj.item.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pers.hrj.api.dto.ItemDTO;
@@ -13,6 +14,7 @@ import pers.hrj.item.service.IItemService;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 /**
  * <p>
@@ -42,5 +44,15 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements II
     @Override
     public List<ItemDTO> queryItemByIds(Collection<Long> ids) {
         return BeanUtils.copyList(listByIds(ids), ItemDTO.class);
+    }
+
+    @Override
+    public void recoverStock(List<OrderDetailDTO> items) {
+        String sqlStatement = "pers.hrj.item.mapper.ItemMapper.recoverStock";
+        try {
+            executeBatch(items, (sqlSession, entity) -> sqlSession.update(sqlStatement, entity));
+        } catch (Exception e) {
+            throw new BizIllegalException("更新库存异常!", e);
+        }
     }
 }
