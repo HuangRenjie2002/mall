@@ -5,7 +5,7 @@ mall:
     database: mall-trade
 spring:
   rabbitmq:
-    host: 192.168.60.10
+    host: localhost
     port: 5672
     virtual-host: /mall
     username: mall
