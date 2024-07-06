@@ -37,6 +37,7 @@
         <mybatis-plus.version>3.5.7</mybatis-plus.version>
         <hutool.version>5.8.28</hutool.version>
         <mysql.version>8.4.0</mysql.version>
+        <elasticsearch-client.version>8.14.1</elasticsearch-client.version>
     </properties>
 
     <!-- 对依赖包进行管理 -->
@@ -90,6 +91,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.13.0</version>
         </dependency>
     </dependencies>
 
